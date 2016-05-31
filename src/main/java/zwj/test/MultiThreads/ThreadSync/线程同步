@@ -1,0 +1,110 @@
+多线程同步：
+（1）同步 “方法”
+    synchronized 关键字修饰 方法
+    java的每个对象都有一个内置锁，当用此关键字修饰方法时，内置锁会保护整个方法。在调用该方法前，需要获得内置锁，否则就处于阻塞状态。
+    注： synchronized关键字也可以修饰静态方法，此时如果调用该静态方法，将会锁住整个类
+
+    代码如：
+        public synchronized void save(){ ... }
+
+（2）同步 “代码块”
+    synchronized关键字修饰 代码块
+    被该关键字修饰的语句块会自动被加上内置锁，从而实现同步
+
+    代码如：
+        synchronized(object){ ... }
+
+注：同步是一种高开销的操作，因此应该尽量减少同步的内容。在多线程访问的时候，同一时刻只能有一个线程能够用synchronized 修饰的方法 或者 代码块。
+    通常没有必要同步整个方法，使用synchronized代码块同步关键代码即可。
+
+
+        /**
+         * 线程同步的运用
+         */
+        public class SynchronizedThread {
+            class Bank {
+                private int account = 100;
+                public int getAccount() {
+                    return account;
+                }
+                /**
+                 * 用同步方法实现
+                 */
+                public synchronized void save(int money) {
+                    account += money;
+                }
+
+                /**
+                 * 用同步代码块实现
+                 */
+                public void save1(int money) {
+                    synchronized (this) {
+                        account += money;
+                    }
+                }
+            }
+
+            class NewThread implements Runnable {
+                private Bank bank;
+                public NewThread(Bank bank) {
+                    this.bank = bank;
+                }
+                @Override
+                public void run() {
+                    for (int i = 0; i < 10; i++) {
+                        // bank.save1(10);
+                        bank.save(10);
+                        System.out.println(i + "账户余额为：" + bank.getAccount());
+                    }
+                }
+
+            }
+
+            /**
+             * 建立线程，调用内部类
+             */
+            public void useThread() {
+                Bank bank = new Bank();
+                NewThread new_thread = new NewThread(bank);
+                System.out.println("线程1");
+                Thread thread1 = new Thread(new_thread);
+                thread1.start();
+                System.out.println("线程2");
+                Thread thread2 = new Thread(new_thread);
+                thread2.start();
+            }
+
+            public static void main(String[] args) {
+                SynchronizedThread st = new SynchronizedThread();
+                st.useThread();
+            }
+        }
+
+（3）使用特殊域变量(volatile)实现线程同步
+     volatile volatile 变量表示保证它必须是与主内存保持一致，它实际是变量的同步。
+     保证线程每次使用前立即从主内存刷新，把变量声明为volatile类型后,编译器与运行时都会注意到这个变量是共享的.（用volatile修饰的变量，线程在每次使用变量的时候，都会读取变量修改后的最的值。）
+       a.volatile关键字为域变量的访问提供了一种免锁机制，
+       b.使用volatile修饰域相当于告诉虚拟机该域可能会被其他线程更新，
+       c.因此每次使用该域就要重新计算，而不是使用寄存器中的值
+       d.volatile不会提供任何原子操作，它也不能用来修饰final类型的变量
+
+
+（4）java.util.concurrent.locks.ReentrantLock
+     java.util.concurrent.中是JDK1.5中出的对于一些并发操作的类库，其中包括很多同学很喜欢的原子类，比如说AtomicInteger
+     java.util.concurrent 是在并发编程中很常用的实用工具类。Java.util.concurrent中实现的原子操作类包括：AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference。
+     ReentrantLock锁能显式的添加锁和释放锁，能够更加准确的控制锁，也能确保系统的稳定，比如说“重连”。
+
+     AtomicInteger：
+        基本工作原理是使用了同步synchronized的方法实现了对一个long, integer, 对象的增、减、赋值（更新）操作. 比如对于++运算符AtomicInteger可以将它持有的integer 能够atomic 地递增。
+        在需要访问两个或两个以上 atomic变量的程序代码（或者是对单一的atomic变量执行两个或两个以上的操作）通常都需要被synchronize以便两者的操作能够被当作是一个atomic的单元。
+
+        class Counter {
+        private AtomicInteger count = new AtomicInteger();
+
+        public void increment() {
+            count.incrementAndGet();
+        }
+               //使用AtomicInteger之后，不需要加锁，也可以实现线程安全。
+        public int getCount() {
+            return count.get();
+        }

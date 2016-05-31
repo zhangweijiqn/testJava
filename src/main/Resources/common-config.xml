@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!-- 测试环境 -->
+    <!--   <entry key="jss_host">storage.jd.com</entry>
+     <entry key="jss_accessKey">PNayjvIGmJBwzmGW</entry>
+     <entry key="jss_secretAccessKey">4EC0wYR8aguYSfS4e0psN638wY1Ny2o7ITx3b63Z</entry>-->
+    <!-- 公有云 -->
+    <entry key="jss_host">storage.jcloud.com</entry>
+    <entry key="jss_accessKey">b0c766c5e93746deaac490edf2d184e5</entry>
+    <entry key="jss_secretAccessKey">25e91ca3b2514bc6a150cb9ae88a3ed4IP1abChI</entry>
+
+    <entry key="jss_local_tmp_dir">/export/home/jss/tmp_dir</entry>
+    <entry key="task_logs_table">task_logs</entry>
+    <!-- <entry key="hbase.zookeeper.quorum">10.28.169.141:10.28.169.142:10.28.169.143</entry> -->
+    <!-- <entry key="hbase.zookeeper.quorum">node88:2181,node89:2181,node90:2181</entry>-->
+    <!--<entry key="hbase.zookeeper.quorum">A01-R06-I149-135.jd.local,A01-R06-I149-136.jd.local,A01-R06-I149-137.jd.local</entry>-->
+    <entry key="hbase.zookeeper.quorum">192.168.177.78,192.168.177.79,192.168.177.80</entry>
+    <entry key="work.dir">/home/zhangwj/MyProjects/testProjects/TestLanguageTech/Java_test/src/main/Resources</entry>
+    <!--<entry key="work.dir">/home/zhangwj/MyProjects/YH-dmpcloud/src/main/resources</entry>-->
+    <entry key="host">bds-test-004</entry>
+</properties>

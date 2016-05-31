@@ -1,0 +1,10 @@
+sqlparser包整个直接导入进来，hiveQL解析
+
+
+DBType中包括两种SQL类型：HIVE和MYSQL
+
+
+测试用例在TestSQLParser.java中
+
+
+sql parser从hive源码中提取出来，HiveParser文件由Antlr生成。

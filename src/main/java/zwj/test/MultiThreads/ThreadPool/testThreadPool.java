@@ -35,6 +35,7 @@ public class testThreadPool {
     public static void main(String[] args) throws InterruptedException {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<Runnable>(5));
+        //SynchronousQueue阻塞队列，LinkedBlockingQueue队列
 
         for(int i=0;i<15;i++){
             MyTask myTask = new MyTask(i+1);

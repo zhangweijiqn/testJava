@@ -1,5 +1,10 @@
 参考：http://www.cnblogs.com/dolphin0520/p/3932921.html
 
+线程池拒绝策略：
+乐观锁和悲观锁
+redis inc锁机制与并发操作： 写加锁，读不加锁，
+atomic integer实现
+
 java.uitl.concurrent.ThreadPoolExecutor类是线程池中最核心的一个类
 
 ThreadPoolExecutor

@@ -54,6 +54,16 @@ public class testDateUtils {
         return df.format(date);
     }
 
+    //获取时间戳
+    public static Long getDateLong(){
+        //        String date = "1472474574643";
+        Date date = new Date();
+        // 返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。
+        long time = date.getTime();
+        System.out.println(time);
+        return time;
+    }
+
     public static void main(String[] args) {
         System.out.println("current:"+getDay());
         System.out.println(getFirstDayOfMonth());

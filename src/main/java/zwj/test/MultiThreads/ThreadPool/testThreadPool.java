@@ -33,8 +33,9 @@ class MyTask implements Runnable {
 
 public class testThreadPool {
     public static void main(String[] args) throws InterruptedException {
+        //ThreadPoolExecutor,ScheduledThreadPoolExecutor
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<Runnable>(5));
+                new ArrayBlockingQueue<Runnable>(15));
         //SynchronousQueue阻塞队列，LinkedBlockingQueue队列
 
         for(int i=0;i<15;i++){
@@ -48,7 +49,7 @@ public class testThreadPool {
                 executor.getQueue().size()+"，已执行玩别的任务数目："+executor.getCompletedTaskCount());
 
         //继续增加线程，队列中的数目会一直保持5，之前保存的线程会被替换
-        for(int i=0;i<5;i++){
+        for(int i=0;i<25;i++){
             MyTask myTask = new MyTask(i+16);
             executor.execute(myTask);
             System.out.println("线程池中线程数目："+executor.getPoolSize()+"，队列中等待执行的任务数目："+
@@ -56,5 +57,14 @@ public class testThreadPool {
         }
 
         executor.shutdown();
+
+        //从结果中可以看出执行过程为：
+        /*
+        *（1） 线程池创建后，大小为0
+        *（2） 启动线程，数目到达coreSize后，随后来的线程加入到Queue中
+        *（3） 当Queue中的数据达到最大后，开始继续向线程池中增加线程，知道达到设定的maxSize
+        *（4） 随后增加线程抛出异常。
+        *
+        * */
     }
 }

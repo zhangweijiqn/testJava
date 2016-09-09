@@ -90,7 +90,9 @@ public class testDateUtils {
 
         setDateFromString(dateAsString);
         System.out.println(getCreateTimeAsString());*/
-
+        String dateAsString = "2016-08-09 10:22:07";
+        Date date = DateUtils.parseT(dateAsString);
+        System.out.println(date);
     }
 
 }

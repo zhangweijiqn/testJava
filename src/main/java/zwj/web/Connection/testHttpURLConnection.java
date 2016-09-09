@@ -29,23 +29,22 @@ public class testHttpURLConnection {
         String validateURL = "http://bds.jcloud.com/api/u/loadProjects?userName=datajingdo_m";
         java.net.HttpURLConnection conn = null;
         try {
-            URL url = new URL(validateURL); //����URL����
-            //����һ��URLConnection��������ʾ��URL�����õ�Զ�̶��������
+            URL url = new URL(validateURL);
             conn = (java.net.HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000); //�������ӳ�ʱΪ5��
-            conn.setRequestMethod("GET"); //�趨����ʽ
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
 
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            conn.connect(); //������Զ�̶����ʵ������
+            conn.connect();
 
 
-            //���ش����Ӷ�ȡ��������
+
             DataInputStream dis = new DataInputStream(conn.getInputStream());
-            //�ж��Ƿ�������Ӧ����
+
             if (conn.getResponseCode() != java.net.HttpURLConnection.HTTP_OK) {
-                System.out.println("��������쳣��!!!");
+                System.out.println("!!!");
 //                return  false;
             }
             else{
@@ -56,10 +55,10 @@ public class testHttpURLConnection {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("�����쳣��");
+            System.out.println("");
         } finally {
             if (conn != null) {
-                conn.disconnect(); //�ж�����
+                conn.disconnect();
             }
         }
     }

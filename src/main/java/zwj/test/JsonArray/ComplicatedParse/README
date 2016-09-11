@@ -1,0 +1,63 @@
+对于复杂的jsonString，如果没有type class，而又要得到里面的一些内容，可以采用如下方式（通过例子说明）：
+    jsonString如下，要获取的是body里的id，name和paragraphs里的 :
+        {
+            "status": "OK",
+            "message": "",
+            "body": {
+                "paragraphs": [
+                    {
+                        "title": "20160909_1473406004622",
+                        "text": "%spark print(1)",
+                        "dateUpdated": "Sep 9, 2016 3:26:43 PM",
+                        "config": {},
+                        "settings": {
+                            "params": {},
+                            "forms": {}
+                        },
+                        "apps": [],
+                        "jobName": "paragraph_1473406003282_562574908",
+                        "id": "20160909-152643_1680047003",
+                        "result": {
+                            "code": "SUCCESS",
+                            "type": "TEXT",
+                            "msg": ""
+                        },
+                        "dateCreated": "Sep 9, 2016 3:26:43 PM",
+                        "dateStarted": "Sep 9, 2016 3:26:43 PM",
+                        "status": "PENDING",
+                        "errorMessage": "",
+                        "progressUpdateIntervalMs": 500
+                    }
+                ],
+                "name": "20160909_1473406004451",
+                "id": "2BV2VU6XW",
+                "lastReplName": {
+                    "value": "spark"
+                }
+            }
+        }
+    根据json不同的层次，创建不同的class：
+    最外层（为了便于观察，省略getter和setter）：
+        public class NotebookResponse {
+            public boolean isOk() {     //自定义方法
+                return (null != status) && "OK".equals(status.trim().toUpperCase()) ;
+            }
+            private String status;
+            private String message;
+            private NotebookModel body;
+        }
+
+    body层是    NotebookModel，可以看到这里只定义了我们需要的字段，其他字段不需要定义出来：
+        public class NotebookModel {
+            private String id;
+            private String name;
+            private List<ParagraphModel> paragraphs;
+        }
+
+    ParagraphModel层：
+        public class ParagraphModel {
+            private String id;
+            private String jobName;
+            private Date dateCreated;
+            private Date dateStarted;
+        }

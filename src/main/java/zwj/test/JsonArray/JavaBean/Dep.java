@@ -1,4 +1,4 @@
-package zwj.test.JsonArray;
+package zwj.test.JsonArray.JavaBean;
 
 import java.util.ArrayList;
 import java.util.List;

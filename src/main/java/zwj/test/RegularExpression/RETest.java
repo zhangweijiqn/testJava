@@ -1,4 +1,4 @@
-package zwj.test.JsonArray;
+package zwj.test.RegularExpression;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Created by yuzhitao on 2015/12/15.
  */
-public class JsonTest {
+public class RETest {
     private static final Pattern PATTERN = Pattern.compile("\\s*CREATE\\s+DATABASE\\s+(.+)\\s*");
     private static final Pattern PUBLIC_PATTERN = Pattern.compile("\\s*CREATE\\s+DATABASE\\s+([a-zA-Z_]{1,}[0-9]{0,})\\s*");
     private static final Pattern PATTERN_Select = Pattern.compile("\\s*SELECT\\s*.+",Pattern.CASE_INSENSITIVE);

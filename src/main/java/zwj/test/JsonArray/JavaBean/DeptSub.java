@@ -1,4 +1,4 @@
-package zwj.test.JsonArray;
+package zwj.test.JsonArray.JavaBean;
 
 /**
  * Created by zhangwj on 15-12-14.

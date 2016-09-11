@@ -6,6 +6,7 @@ package zwj.test.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.json.JSONArray;
+import zwj.test.JsonArray.JavaBean.User;
 
 public class TestJsonArray {
     public static void main(String[] args) {

@@ -3,6 +3,9 @@ package zwj.test.JsonArray;
 import com.alibaba.fastjson.JSON;
 import org.apache.avro.data.Json;
 import org.apache.log4j.Logger;
+import zwj.test.JsonArray.JavaBean.Dep;
+import zwj.test.JsonArray.JavaBean.DeptSub;
+import zwj.test.JsonArray.JavaBean.Student;
 
 import java.util.ArrayList;
 import java.util.List;

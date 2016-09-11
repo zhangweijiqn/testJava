@@ -1,4 +1,4 @@
-package zwj.test.JsonArray.GsonTest;
+package zwj.test.JsonArray.GsonTest.Type;
 
 /**
  * �������
